@@ -4,7 +4,8 @@ WORKDIR /app
 COPY . .
 RUN mvn package -DskipTests
 
-FROM openjdk:17-slim
+# Mudou aqui - imagem nova do Eclipse Temurin (recomendada pela OpenJDK)
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/quarkus-app /app
 EXPOSE 8080
