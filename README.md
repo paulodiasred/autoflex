@@ -65,8 +65,14 @@ Instale antes de começar:
 - [Java 21](https://adoptium.net/)
 - [Maven 3.9+](https://maven.apache.org/download.cgi)
 - [Node.js LTS](https://nodejs.org/)
-
 > Após instalar, feche e abra o terminal para o PATH atualizar.
+
+> 💡 **Nota para Windows:** O Maven está incluído na pasta `.tools/apache-maven-3.9.12` do projeto. 
+> Para usá-lo, adicione ao PATH da sessão:
+> ```powershell
+> $env:Path = "P:\codigo pessoal\teste java\.tools\apache-maven-3.9.12\bin;$env:Path"
+> ```
+> Ou configure permanentemente nas Variáveis de Ambiente do Windows.
 
 ---
 
@@ -98,6 +104,16 @@ docker compose ps
 cd backend
 QUARKUS_PROFILE=local ./mvnw quarkus:dev
 ```
+
+> **🐧 No Linux/Mac:** Use `./mvnw` (wrapper)  
+> **🪟 No Windows:** 
+> - Se tiver Maven instalado: `mvn quarkus:dev`  
+> - Se não tiver, use o Maven da pasta `.tools`:
+>   ```powershell
+>   $env:Path = "P:\caminho\para\.tools\apache-maven-3.9.12\bin;$env:Path"
+>   mvn quarkus:dev
+>   ```
+> - Ou configure o PATH permanentemente (recomendado)
 
 Acesse para confirmar que está rodando:
 - API: http://localhost:8080/api/health
