@@ -1,0 +1,19 @@
+# Build do Maven
+target/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# Quarkus dev mode
+.quarkus/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

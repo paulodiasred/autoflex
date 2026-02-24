@@ -1,0 +1,18 @@
+package com.autoflex.challenge.productmaterial;
+
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+
+import java.util.List;
+
+@ApplicationScoped
+public class ProductMaterialRepository implements PanacheRepository<ProductMaterial> {
+
+    public List<ProductMaterial> findByProductId(Long productId) {
+        return list("product.id", productId);
+    }
+
+    public void deleteByProductId(Long productId) {
+        delete("product.id", productId);
+    }
+}

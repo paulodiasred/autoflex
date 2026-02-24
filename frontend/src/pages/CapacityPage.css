@@ -1,0 +1,56 @@
+.badge-hoverable {
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+
+/* Tooltip flutuante com position: fixed */
+.tooltip-box {
+  background: #1e293b;
+  color: #f1f5f9;
+  border-radius: 8px;
+  padding: 0.75rem 1rem 0.85rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #1e293b;
+}
+
+.tooltip-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+.tooltip-table th {
+  color: #94a3b8;
+  font-weight: 600;
+  text-align: left;
+  padding: 0 0.6rem 0.4rem;
+  border-bottom: 1px solid #334155;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tooltip-table td {
+  padding: 0.35rem 0.6rem;
+  color: #e2e8f0;
+}
+
+.tooltip-row-danger td {
+  color: #fca5a5;
+}

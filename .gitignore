@@ -1,0 +1,22 @@
+# Ferramentas locais (Maven baixado durante setup)
+.tools/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Variáveis de ambiente locais
+.env
+.env.local
+
+# arquvios so meus kkk
+Entrevista.md
+GUIA_DO_PROJETO.md
+DEPLOY.md
