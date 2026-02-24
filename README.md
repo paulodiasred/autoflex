@@ -4,7 +4,33 @@
 
 # Autoflex Challenge — Sistema de Capacidade de Produção
 
+<div align="center">
+
+[![Vercel](https://img.shields.io/badge/Frontend-Vercel-000000?style=for-the-badge&logo=vercel)](https://autoflex-lemon.vercel.app)
+[![Render](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)](https://autoflex-backend-0r3b.onrender.com)
+[![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=java)](https://adoptium.net/)
+[![Quarkus](https://img.shields.io/badge/Quarkus-3.20-4695EB?style=for-the-badge&logo=quarkus)](https://quarkus.io/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
+[![Oracle](https://img.shields.io/badge/Oracle-23ai-F80000?style=for-the-badge&logo=oracle)](https://www.oracle.com/database/)
+
+</div>
+
 Sistema web fullstack para gerenciamento de produtos e matérias-primas, com cálculo automático de capacidade de produção com base no estoque disponível.
+
+---
+
+## 🌐 Acesse o projeto online
+
+O sistema está disponível nos seguintes links:
+
+| Serviço | URL |
+|---------|-----|
+| **Frontend** | [https://autoflex-lemon.vercel.app](https://autoflex-lemon.vercel.app) |
+| **Backend** | [https://autoflex-backend-0r3b.onrender.com](https://autoflex-backend-0r3b.onrender.com) |
+| **Swagger UI** | [https://autoflex-backend-0r3b.onrender.com/q/swagger-ui](https://autoflex-backend-0r3b.onrender.com/q/swagger-ui) |
+
+> ⚠️ **Nota:** O backend no Render utiliza plano gratuito e pode demorar de 30 a 50 segundos para responder após períodos de inatividade.
 
 ---
 
@@ -18,19 +44,21 @@ Este projeto foi desenvolvido como parte do desafio técnico para a vaga de dese
 🐙 **GitHub:** [github.com/paulodiasred](https://github.com/paulodiasred)
 
 
-## Tecnologias
+## 🛠️ Tecnologias
 
 | Camada | Tecnologia |
 |---|---|
-| Back-end | Java 21 + Quarkus |
-| Front-end | React + Redux Toolkit |
-| Banco de dados | Oracle (via Docker) |
+| Back-end | Java 21 + Quarkus 3.20 |
+| Front-end | React 18 + Redux Toolkit |
+| Banco de dados | Oracle 23ai (local/Docker) + PostgreSQL 16 (produção) |
 | Testes back-end | JUnit 5 + Mockito |
 | Testes E2E | Cypress |
+| Deploy | Vercel (frontend) + Render (backend + PostgreSQL) |
+| Container | Docker + Docker Compose |
 
 ---
 
-## Pré-requisitos
+## 📋 Pré-requisitos
 
 Instale antes de começar:
 
@@ -43,14 +71,15 @@ Instale antes de começar:
 
 ---
 
-## Como rodar o projeto
+## 🚀 Como rodar o projeto localmente
 
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/SEU_USUARIO/SEU_REPO.git
-cd SEU_REPO
+git clone https://github.com/paulodiasred/autoflex.git
+cd autoflex
 ```
+
 
 ### 2. Suba o banco Oracle
 
@@ -64,11 +93,11 @@ Aguarde o status ficar `healthy`:
 docker compose ps
 ```
 
-### 3. Suba o back-end
+### 3. Suba o back-end(com perfil local)
 
 ```bash
 cd backend
-mvn quarkus:dev
+QUARKUS_PROFILE=local ./mvnw quarkus:dev
 ```
 
 Acesse para confirmar que está rodando:
@@ -86,6 +115,25 @@ npm run dev
 ```
 
 Acesse o sistema em: **http://localhost:5173**
+
+###🗄️ Configuração do banco de dados
+
+Local (desenvolvimento) - Oracle no Docker
+```bash
+URL:    jdbc:oracle:thin:@localhost:1521/FREEPDB1
+Usuário: app_user
+Senha:   app_password
+```
+Produção (Render) - PostgreSQL
+O banco PostgreSQL está hospedado no próprio Render. As variáveis de ambiente são configuradas automaticamente:
+
+| Variável | Valor |
+|----------|-------|
+| `QUARKUS_DATASOURCE_JDBC_URL` | postgresql://... (gerada pelo Render) |
+| `QUARKUS_DATASOURCE_USERNAME` | autoflex_user |
+| `QUARKUS_DATASOURCE_PASSWORD` | (gerada pelo Render) |
+
+> O Quarkus utiliza **perfis diferentes** (`%local` e `%prod`) para alternar automaticamente entre as configurações.
 
 ---
 
@@ -139,14 +187,36 @@ npm run cy:run    # terminal
 
 ```
 /
-├── backend/          # API REST em Java + Quarkus
-├── frontend/         # Interface React + Redux
-├── docker-compose.yml    # Oracle via Docker
+├── backend/               # API REST em Java + Quarkus
+│   ├── src/
+│   │   ├── main/java/     # Código fonte
+│   │   └── test/java/     # Testes unitários
+│   └── pom.xml
+│
+├── frontend/              # Interface React + Redux
+│   ├── src/
+│   ├── cypress/           # Testes E2E
+│   └── package.json
+│
+├── docker-compose.yml     # Oracle via Docker
+└── README.md
 ```
 
 ---
 
 ## Configuração do banco
+
+### Local (desenvolvimento) - Oracle no Docker
+URL: jdbc:oracle:thin:@localhost:1521/FREEPDB1
+Usuário: app_user
+Senha: app_password
+### Produção (Render) - PostgreSQL
+O banco PostgreSQL está hospedado no próprio Render. As variáveis de ambiente são configuradas automaticamente:
+- `QUARKUS_DATASOURCE_JDBC_URL`
+- `QUARKUS_DATASOURCE_USERNAME`  
+- `QUARKUS_DATASOURCE_PASSWORD`
+
+> O Quarkus usa **perfis diferentes** (`local` e `prod`) para alternar entre Oracle e PostgreSQL automaticamente.
 
 Definida em `backend/src/main/resources/application.properties`:
 
@@ -184,6 +254,24 @@ As tabelas e sequences são criadas automaticamente pelo Hibernate ao subir o ba
 | Extra — Busca em tempo real | ✅ |
 | Extra — Ordenação inteligente (estoque baixo) | ✅ |
 | Extra — Indicador visual de materiais | ✅ |
+
+## 🌍 Deploy
+
+### Frontend (Vercel)
+- **Plataforma:** [Vercel](https://vercel.com)
+- **URL:** [https://autoflex-lemon.vercel.app](https://autoflex-lemon.vercel.app)
+- **Variável de ambiente:** `VITE_API_URL=https://autoflex-backend-0r3b.onrender.com/api`
+
+### Backend (Render)
+- **Plataforma:** [Render](https://render.com)
+- **URL:** [https://autoflex-backend-0r3b.onrender.com](https://autoflex-backend-0r3b.onrender.com)
+- **Tipo:** Docker (Java 21 + Quarkus)
+- **Banco de dados:** PostgreSQL gerenciado pelo Render
+
+### Banco de dados (Render)
+- **Tipo:** PostgreSQL 16
+- **Plano:** Free Tier
+- **Backups automáticos:** Sim (diários)
 
 ## 📌 Observação
 
