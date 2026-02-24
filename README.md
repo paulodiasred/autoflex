@@ -104,6 +104,43 @@ Acesse para confirmar que está rodando:
 - API: http://localhost:8080/api/health
 - Swagger UI: http://localhost:8080/q/swagger-ui
 
+### ⚠️ Importante: Alternando entre Oracle e PostgreSQL
+
+O projeto suporta **Oracle local** e **PostgreSQL em produção**, mas os drivers são mutuamente exclusivos.
+
+#### Se você for rodar LOCALMENTE com Oracle:
+1. **Descomente** a dependência do Oracle no `backend/pom.xml`:
+   ```xml
+   <!-- Descomente para usar Oracle local -->
+   <dependency>
+       <groupId>io.quarkus</groupId>
+       <artifactId>quarkus-jdbc-oracle</artifactId>
+   </dependency>
+   ```
+
+2. **Comente** a dependência do PostgreSQL (opcional, se quiser testar apenas Oracle):
+   ```xml
+   <!-- Comente se for usar apenas Oracle --> 
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-jdbc-postgresql</artifactId>
+</dependency>
+
+``` 
+
+3. Use o perfil local:
+```bash
+QUARKUS_PROFILE=local ./mvnw quarkus:dev
+```
+
+No Render (produção):
+- O driver Oracle deve permanecer comentado no pom.xml
+- Apenas o driver PostgreSQL fica ativo
+- O perfil prod é ativado automaticamente via variável de ambiente
+- O banco PostgreSQL gerenciado pelo Render é utilizado
+
+🔴 Atenção: Nunca faça deploy no Render com o driver Oracle descomentado, pois isso pode causar conflitos de dependência e impedir a aplicação de iniciar.
+
 ### 4. Suba o front-end
 
 Em outro terminal:
@@ -116,7 +153,7 @@ npm run dev
 
 Acesse o sistema em: **http://localhost:5173**
 
-###🗄️ Configuração do banco de dados
+### 🗄️ Configuração do banco de dados
 
 Local (desenvolvimento) - Oracle no Docker
 ```bash
@@ -204,32 +241,6 @@ npm run cy:run    # terminal
 
 ---
 
-## Configuração do banco
-
-### Local (desenvolvimento) - Oracle no Docker
-URL: jdbc:oracle:thin:@localhost:1521/FREEPDB1
-Usuário: app_user
-Senha: app_password
-### Produção (Render) - PostgreSQL
-O banco PostgreSQL está hospedado no próprio Render. As variáveis de ambiente são configuradas automaticamente:
-- `QUARKUS_DATASOURCE_JDBC_URL`
-- `QUARKUS_DATASOURCE_USERNAME`  
-- `QUARKUS_DATASOURCE_PASSWORD`
-
-> O Quarkus usa **perfis diferentes** (`local` e `prod`) para alternar entre Oracle e PostgreSQL automaticamente.
-
-Definida em `backend/src/main/resources/application.properties`:
-
-```
-URL:    jdbc:oracle:thin:@localhost:1521/FREEPDB1
-Usuário: app_user
-Senha:   app_password
-```
-
-As tabelas e sequences são criadas automaticamente pelo Hibernate ao subir o back-end.
-
----
-
 ## Requisitos atendidos
 
 | Requisito | Status |
@@ -279,3 +290,5 @@ Este projeto foi desenvolvido integralmente por **Paulo Dias** como parte do pro
 Todo o código, documentação e decisões técnicas refletem minha abordagem pessoal para resolver o desafio proposto.
 
 **Data de entrega:** Fevereiro de 2026
+
+<div align="center"> <sub>⭐ Se gostou do projeto, não esquece de deixar uma estrela no repositório! ⭐</sub> </div>
