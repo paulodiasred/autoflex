@@ -7,7 +7,7 @@
 <div align="center">
 
 [![Vercel](https://img.shields.io/badge/Frontend-Vercel-000000?style=for-the-badge&logo=vercel)](https://autoflex-lemon.vercel.app)
-[![Render](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)](https://autoflex-backend-0r3b.onrender.com)
+![Render](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)
 [![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=java)](https://adoptium.net/)
 [![Quarkus](https://img.shields.io/badge/Quarkus-3.20-4695EB?style=for-the-badge&logo=quarkus)](https://quarkus.io/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
@@ -27,7 +27,6 @@ O sistema está disponível nos seguintes links:
 | Serviço | URL |
 |---------|-----|
 | **Frontend** | [https://autoflex-lemon.vercel.app](https://autoflex-lemon.vercel.app) |
-| **Backend** | [https://autoflex-backend-0r3b.onrender.com](https://autoflex-backend-0r3b.onrender.com) |
 | **Swagger UI** | [https://autoflex-backend-0r3b.onrender.com/q/swagger-ui](https://autoflex-backend-0r3b.onrender.com/q/swagger-ui) |
 
 > ⚠️ **Nota:** O backend no Render utiliza plano gratuito e pode demorar de 30 a 50 segundos para responder após períodos de inatividade.
