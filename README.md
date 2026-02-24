@@ -136,12 +136,11 @@ O projeto suporta **Oracle local** e **PostgreSQL em produção**, mas os driver
 2. **Comente** a dependência do PostgreSQL (opcional, se quiser testar apenas Oracle):
    ```xml
    <!-- Comente se for usar apenas Oracle --> 
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-jdbc-postgresql</artifactId>
-</dependency>
-
-``` 
+    <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    ``` 
 
 3. Use o perfil local:
 ```bash
